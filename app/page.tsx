@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { supabase } from '@/lib/supabase'
 import { getDeviceFingerprint } from '@/lib/fingerprint'
+import HCaptcha from '@/components/ui/HCaptcha'
 import toast from 'react-hot-toast'
 
 const BULGARIA_POPULATION = 6_688_836
@@ -22,6 +23,7 @@ export default function Home() {
   const [totalVotes, setTotalVotes] = useState(0)
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [mounted, setMounted] = useState(false)
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
 
   const handleVote = (voteChoice: 'for' | 'against') => {
     setVote(voteChoice)
@@ -88,9 +90,8 @@ export default function Home() {
       return
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      toast.error('Невалидна имейл адрес!')
+    if (!captchaToken) {
+      toast.error('Моля, потвърдете CAPTCHA!')
       return
     }
 
@@ -99,44 +100,31 @@ export default function Home() {
     try {
       const deviceFingerprint = await getDeviceFingerprint()
 
-      const { data: emailCheck } = await supabase
-        .from('votes')
-        .select('id')
-        .eq('email', email.toLowerCase())
-        .limit(1)
-
-      if (emailCheck && emailCheck.length > 0) {
-        toast.error('Този имейл адрес вече е гласувал!')
-        setLoading(false)
-        return
-      }
-
-      const { data: fingerprintCheck } = await supabase
-        .from('votes')
-        .select('id')
-        .eq('device_fingerprint', deviceFingerprint)
-        .limit(1)
-
-      if (fingerprintCheck && fingerprintCheck.length > 0) {
-        toast.error('На това устройство вече е гласувано!')
-        setLoading(false)
-        return
-      }
-
-      const { error } = await supabase.from('votes').insert({
-        name: name.trim(),
-        city: city.trim(),
-        email: email.toLowerCase(),
-        vote: vote,
-        device_fingerprint: deviceFingerprint,
+      const response = await fetch('/api/vote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          city: city.trim(),
+          email: email.toLowerCase(),
+          vote: vote,
+          deviceFingerprint: deviceFingerprint,
+          captchaToken: captchaToken,
+        }),
       })
 
-      if (error) {
-        throw error
+      const data = await response.json()
+
+      if (!response.ok) {
+        toast.error(data.error || 'Грешка при гласуване!')
+        return
       }
 
       setStep('results')
       toast.success('Вашият глас е записан! 🇧🇬')
+      setCaptchaToken(null)
     } catch (error) {
       console.error('Error:', error)
       toast.error('Грешка при гласуване!')
@@ -386,6 +374,8 @@ export default function Home() {
               <p className="text-xs text-gray-500 text-center">
                 След потвърждение, вашият глас не може да бъде променен.
               </p>
+
+              <HCaptcha onVerify={setCaptchaToken} />
 
               <motion.button
                 whileHover={{ scale: 1.02 }}
