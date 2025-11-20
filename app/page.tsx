@@ -146,7 +146,19 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
+    <>
+      {/* Sticky Warning Banner */}
+      {mounted && (
+        <div className="fixed top-0 left-0 right-0 bg-yellow-50 border-b-2 border-yellow-300 p-3 z-40">
+          <div className="max-w-7xl mx-auto text-center">
+            <p className="text-sm font-semibold text-yellow-800">
+              ДИСКЛЕЙМЕР: Това е неофициална анкета. НЕ е официален референдум и НЕ е регистрирана при държавни органи.
+            </p>
+          </div>
+        </div>
+      )}
+
+      <main className="min-h-screen bg-white flex flex-col items-center justify-center p-4 pt-24">
       <AnimatePresence mode="wait">
         {/* Welcome Screen */}
         {step === 'welcome' && (
@@ -494,6 +506,7 @@ export default function Home() {
           Не е официален референдум и не е регистрирана при държавни органи.
         </p>
       </footer>
-    </main>
+      </main>
+    </>
   )
 }
