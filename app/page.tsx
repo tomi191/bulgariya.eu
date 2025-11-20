@@ -147,13 +147,31 @@ export default function Home() {
 
   return (
     <>
-      {/* Sticky Warning Banner */}
+      {/* Sticky Warning Banner with Countdown */}
       {mounted && (
-        <div className="fixed top-0 left-0 right-0 bg-yellow-50 border-b-2 border-yellow-300 p-3 z-40">
-          <div className="max-w-7xl mx-auto text-center">
-            <p className="text-sm font-semibold text-yellow-800">
+        <div className="fixed top-0 left-0 right-0 bg-red-600 p-4 z-40">
+          <div className="max-w-7xl mx-auto">
+            <p className="text-center text-sm font-semibold text-white mb-3">
               ДИСКЛЕЙМЕР: Това е неофициална анкета. НЕ е официален референдум и НЕ е регистрирана при държавни органи.
             </p>
+            <div className="flex justify-center items-center gap-8">
+              <div className="text-center">
+                <p className="text-white text-2xl font-bold">{countdown.days}</p>
+                <p className="text-white text-xs">дни</p>
+              </div>
+              <div className="text-center">
+                <p className="text-white text-2xl font-bold">{countdown.hours}</p>
+                <p className="text-white text-xs">часа</p>
+              </div>
+              <div className="text-center">
+                <p className="text-white text-2xl font-bold">{countdown.minutes}</p>
+                <p className="text-white text-xs">минути</p>
+              </div>
+              <div className="text-center">
+                <p className="text-white text-2xl font-bold">{countdown.seconds}</p>
+                <p className="text-white text-xs">секунди</p>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -177,31 +195,6 @@ export default function Home() {
               <p className="text-gray-600 mb-6 text-sm leading-relaxed">
                 Референдум за приемане на еврото като официална валута на България от 01.01.2026
               </p>
-
-              {/* Countdown */}
-              {mounted && (
-                <div className="border border-gray-300 rounded-lg p-6 mb-8 bg-gray-50">
-                  <p className="text-xs text-gray-600 mb-4 font-semibold uppercase">Брой дни до референдума</p>
-                  <div className="grid grid-cols-4 gap-3">
-                    <div className="text-center">
-                      <p className="text-3xl font-bold text-black">{countdown.days}</p>
-                      <p className="text-xs text-gray-600 mt-1">дни</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-3xl font-bold text-black">{countdown.hours}</p>
-                      <p className="text-xs text-gray-600 mt-1">часа</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-3xl font-bold text-black">{countdown.minutes}</p>
-                      <p className="text-xs text-gray-600 mt-1">минути</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-3xl font-bold text-black">{countdown.seconds}</p>
-                      <p className="text-xs text-gray-600 mt-1">секунди</p>
-                    </div>
-                  </div>
-                </div>
-              )}
 
               <div className="border border-gray-300 rounded-lg p-3 mb-8 bg-gray-50">
                 <p className="text-xs text-gray-700">
