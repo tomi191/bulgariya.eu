@@ -147,36 +147,33 @@ export default function Home() {
 
   return (
     <>
-      {/* Sticky Warning Banner with Countdown */}
+      {/* Warning Banner with Countdown */}
       {mounted && (
-        <div className="fixed top-0 left-0 right-0 bg-red-600 p-4 z-40">
+        <div className="bg-red-600 py-1 px-4">
           <div className="max-w-7xl mx-auto">
-            <p className="text-center text-sm font-semibold text-white mb-3">
-              ДИСКЛЕЙМЕР: Това е неофициална анкета. НЕ е официален референдум и НЕ е регистрирана при държавни органи.
-            </p>
-            <div className="flex justify-center items-center gap-8">
+            <div className="flex justify-center items-center gap-3">
               <div className="text-center">
-                <p className="text-white text-2xl font-bold">{countdown.days}</p>
-                <p className="text-white text-xs">дни</p>
+                <p className="text-white text-sm font-bold">{countdown.days}</p>
+                <p className="text-white text-2xs">дни</p>
               </div>
               <div className="text-center">
-                <p className="text-white text-2xl font-bold">{countdown.hours}</p>
-                <p className="text-white text-xs">часа</p>
+                <p className="text-white text-sm font-bold">{countdown.hours}</p>
+                <p className="text-white text-2xs">часа</p>
               </div>
               <div className="text-center">
-                <p className="text-white text-2xl font-bold">{countdown.minutes}</p>
-                <p className="text-white text-xs">минути</p>
+                <p className="text-white text-sm font-bold">{countdown.minutes}</p>
+                <p className="text-white text-2xs">минути</p>
               </div>
               <div className="text-center">
-                <p className="text-white text-2xl font-bold">{countdown.seconds}</p>
-                <p className="text-white text-xs">секунди</p>
+                <p className="text-white text-sm font-bold">{countdown.seconds}</p>
+                <p className="text-white text-2xs">секунди</p>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      <main className="min-h-screen bg-white flex flex-col items-center justify-center p-4 pt-24">
+      <main className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
       <AnimatePresence mode="wait">
         {/* Welcome Screen */}
         {step === 'welcome' && (
