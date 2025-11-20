@@ -25,7 +25,8 @@
       "Bash(git remote add:*)",
       "Bash(git branch:*)",
       "Bash(git push:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "mcp__vercel__list_projects"
     ],
     "deny": [],
     "ask": []
