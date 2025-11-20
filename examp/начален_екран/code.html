@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html class="light" lang="bg"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Референдум Еврозона</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24;
+            font-size: 24px; /* Default size */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- TopAppBar -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between">
+<div class="flex size-12 shrink-0 items-center justify-center text-zinc-900 dark:text-zinc-50">
+<span class="material-symbols-outlined" style="font-size: 28px;">verified_user</span>
+</div>
+<h2 class="flex-1 text-lg font-bold leading-tight tracking-[-0.015em] text-zinc-900 dark:text-zinc-50">Референдум 2024</h2>
+</div>
+<main class="flex flex-1 flex-col justify-center px-4">
+<div class="flex flex-col items-center justify-center text-center">
+<!-- Hero Icon -->
+<div class="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary/80">
+<span class="material-symbols-outlined" style="font-size: 48px;">how_to_vote</span>
+</div>
+<!-- HeadlineText -->
+<h1 class="text-zinc-900 dark:text-zinc-50 tracking-tight text-[32px] font-bold leading-tight pb-3">Референдум: България в Еврозоната?</h1>
+<!-- BodyText -->
+<p class="text-zinc-800 dark:text-zinc-300 text-base font-normal leading-normal pb-3">
+                    Изразете Вашата позиция относно приемането на еврото като официална валута в Република България.
+                </p>
+<!-- Security Info Text -->
+<div class="flex items-center gap-2 pt-2 text-zinc-500 dark:text-zinc-400">
+<span class="material-symbols-outlined" style="font-size: 16px;">lock</span>
+<p class="text-xs font-normal leading-normal">Вашият вот е анонимен и защитен.</p>
+</div>
+</div>
+</main>
+<footer class="w-full p-4 pt-8">
+<!-- SingleButton -->
+<div class="flex">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 flex-1 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] shadow-lg shadow-primary/30 hover:bg-primary/90 transition-colors">
+<span class="truncate">Към гласуване</span>
+</button>
+</div>
+<!-- MetaText -->
+<div class="pt-4">
+<p class="text-primary dark:text-primary/80 text-sm font-normal leading-normal text-center underline cursor-pointer">Научете повече за референдума</p>
+</div>
+</footer>
+</div>
+</body></html>
