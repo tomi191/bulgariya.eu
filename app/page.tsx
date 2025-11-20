@@ -20,6 +20,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
   const [voteStats, setVoteStats] = useState({ for: 0, against: 0 })
   const [totalVotes, setTotalVotes] = useState(0)
+  const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+  const [mounted, setMounted] = useState(false)
 
   const handleVote = (voteChoice: 'for' | 'against') => {
     setVote(voteChoice)
@@ -52,6 +54,30 @@ export default function Home() {
     return () => {
       subscription.unsubscribe()
     }
+  }, [])
+
+  useEffect(() => {
+    setMounted(true)
+
+    const updateCountdown = () => {
+      const targetDate = new Date('2026-01-01T00:00:00').getTime()
+      const now = new Date().getTime()
+      const difference = targetDate - now
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24))
+        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24)
+        const minutes = Math.floor((difference / 1000 / 60) % 60)
+        const seconds = Math.floor((difference / 1000) % 60)
+
+        setCountdown({ days, hours, minutes, seconds })
+      }
+    }
+
+    updateCountdown()
+    const timer = setInterval(updateCountdown, 1000)
+
+    return () => clearInterval(timer)
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -139,6 +165,32 @@ export default function Home() {
               <p className="text-gray-600 mb-6 text-sm leading-relaxed">
                 Референдум за приемане на еврото като официална валута на България от 01.01.2026
               </p>
+
+              {/* Countdown */}
+              {mounted && (
+                <div className="border border-gray-300 rounded-lg p-6 mb-8 bg-gray-50">
+                  <p className="text-xs text-gray-600 mb-4 font-semibold uppercase">Брой дни до референдума</p>
+                  <div className="grid grid-cols-4 gap-3">
+                    <div className="text-center">
+                      <p className="text-3xl font-bold text-black">{countdown.days}</p>
+                      <p className="text-xs text-gray-600 mt-1">дни</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-3xl font-bold text-black">{countdown.hours}</p>
+                      <p className="text-xs text-gray-600 mt-1">часа</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-3xl font-bold text-black">{countdown.minutes}</p>
+                      <p className="text-xs text-gray-600 mt-1">минути</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-3xl font-bold text-black">{countdown.seconds}</p>
+                      <p className="text-xs text-gray-600 mt-1">секунди</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div className="border border-gray-300 rounded-lg p-3 mb-8 bg-gray-50">
                 <p className="text-xs text-gray-700">
                   Анонимна и защитена анкета. Всеки избор се брои.
