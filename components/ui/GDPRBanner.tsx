@@ -32,7 +32,7 @@ export default function GDPRBanner() {
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-sm">
         <p className="mb-2 md:mb-0 text-center md:text-left">
-          Сайтът използва "бисквитки", за да осигури по-добро потребителско изживяване. Продължавайки, Вие се съгласявате с нашата{' '}
+          Сайтът използва &quot;бисквитки&quot;, за да осигури по-добро потребителско изживяване. Продължавайки, Вие се съгласявате с нашата{' '}
           <a href="#" className="underline font-semibold text-blue-400 hover:text-blue-300">
             Политика за поверителност
           </a>.

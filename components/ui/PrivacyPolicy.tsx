@@ -60,7 +60,7 @@ export default function PrivacyPolicy() {
                 <li>Име</li>
                 <li>Град</li>
                 <li>Имейл адрес</li>
-                <li>Вашият глас ("За" или "Против")</li>
+                <li>Вашият глас (&quot;За&quot; или &quot;Против&quot;)</li>
                 <li>Анонимизиран IP адрес за предотвратяване на дублирани гласове.</li>
               </ul>
 
