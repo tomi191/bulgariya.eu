@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { supabase } from '@/lib/supabase'
+import { getDeviceFingerprint } from '@/lib/fingerprint'
 import toast from 'react-hot-toast'
 
 const BULGARIA_POPULATION = 6_688_836
@@ -70,8 +71,7 @@ export default function Home() {
     setLoading(true)
 
     try {
-      const ipResponse = await fetch('/api/get-ip')
-      const { ip } = await ipResponse.json()
+      const deviceFingerprint = await getDeviceFingerprint()
 
       const { data: emailCheck } = await supabase
         .from('votes')
@@ -85,14 +85,14 @@ export default function Home() {
         return
       }
 
-      const { data: ipCheck } = await supabase
+      const { data: fingerprintCheck } = await supabase
         .from('votes')
         .select('id')
-        .eq('ip_address', ip)
+        .eq('device_fingerprint', deviceFingerprint)
         .limit(1)
 
-      if (ipCheck && ipCheck.length > 0) {
-        toast.error('Вече е гласувано от този IP адрес!')
+      if (fingerprintCheck && fingerprintCheck.length > 0) {
+        toast.error('На това устройство вече е гласувано!')
         setLoading(false)
         return
       }
@@ -102,7 +102,7 @@ export default function Home() {
         city: city.trim(),
         email: email.toLowerCase(),
         vote: vote,
-        ip_address: ip,
+        device_fingerprint: deviceFingerprint,
       })
 
       if (error) {

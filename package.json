@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^5.0.1",
     "@supabase/supabase-js": "^2.38.0",
     "framer-motion": "^10.16.4",
     "js-cookie": "^3.0.5",
