@@ -203,7 +203,7 @@ export default function Home() {
                 onClick={() => setStep('voting')}
                 className="w-full bg-black hover:bg-gray-900 text-white font-bold py-3 px-6 rounded-lg transition mb-8"
               >
-                Начало на гласуване
+                Гласувай сега
               </button>
             </div>
 
@@ -489,13 +489,6 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Disclaimer Footer */}
-      <footer className="mt-12 text-center text-xs text-gray-500 max-w-2xl px-4">
-        <p>
-          Дисклеймер: Това е неофициална анкета за събиране на общественото мнение.
-          Не е официален референдум и не е регистрирана при държавни органи.
-        </p>
-      </footer>
       </main>
     </>
   )
