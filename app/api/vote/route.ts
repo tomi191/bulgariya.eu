@@ -107,9 +107,14 @@ export async function POST(request: NextRequest) {
 
     const { name: cleanName, city: cleanCity, email: cleanEmail } = validation.data!
 
-    // TODO: Verify CAPTCHA token with hCaptcha API
-    // For now, we'll trust it since client-side validation passed
-    // In production, always verify on backend
+    // TODO: Verify CAPTCHA token with hCaptcha API on production
+    // For development on localhost, hCaptcha doesn't work without proper domain configuration
+    // In production, implement proper CAPTCHA verification:
+    // const captchaResponse = await fetch('https://hcaptcha.com/siteverify', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    //   body: `response=${_}&secret=${process.env.HCAPTCHA_SECRET_KEY}`
+    // })
 
     // Check for duplicate email
     const { data: emailExists } = await supabase

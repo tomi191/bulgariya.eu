@@ -90,7 +90,9 @@ export default function Home() {
       return
     }
 
-    if (!captchaToken) {
+    // Allow submission without CAPTCHA on localhost for development
+    const isLocalhost = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    if (!captchaToken && !isLocalhost) {
       toast.error('Моля, потвърдете CAPTCHA!')
       return
     }
@@ -257,7 +259,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => {
-                  const text = `Вече ${totalVotes} българи гласуват! За: ${voteStats.for} | Protiv: ${voteStats.against} 🇧🇬`
+                  const text = `Вече ${totalVotes} българи гласуват! За: ${voteStats.for} | Против: ${voteStats.against} 🇧🇬`
                   window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.href)}`, 'twitter-share', 'width=600,height=400')
                 }}
                 className="px-4 py-2 bg-black hover:bg-gray-800 text-white text-sm font-medium rounded-lg transition"
@@ -449,7 +451,7 @@ export default function Home() {
                     </p>
                   </div>
                   <div className="border border-gray-300 rounded-lg p-4 text-center bg-gray-50">
-                    <p className="text-sm text-gray-600 mb-2">Protiv Еврото</p>
+                    <p className="text-sm text-gray-600 mb-2">Против Еврото</p>
                     <p className="text-3xl font-bold text-black">{voteStats.against}</p>
                     <p className="text-sm text-gray-500 mt-2">
                       {totalVotes > 0 ? ((voteStats.against / totalVotes) * 100).toFixed(1) : 0}%
